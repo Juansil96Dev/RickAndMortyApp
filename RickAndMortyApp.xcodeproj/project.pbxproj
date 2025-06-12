@@ -14,7 +14,7 @@
 		609BCD7F2DFAF9BB00E9C3D5 /* Exceptions for "RickAndMortyApp" folder in "RickAndMortyApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 609BCD692DFAF9BA00E9C3D5 /* RickAndMortyApp */;
 		};
