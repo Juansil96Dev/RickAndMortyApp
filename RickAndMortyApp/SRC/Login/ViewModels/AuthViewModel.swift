@@ -11,7 +11,7 @@ class AuthViewModel {
     
     private let repository: AuthRepository
     
-    var onNavigateToDashBoard: (() -> Void)?
+    var onNavigateToDashBoard: ((UserEntity) -> Void)?
     var onNavigateToRegisterUser: (() -> Void)?
     
     var loginSuccess: ((UserEntity) -> Void)?
@@ -64,8 +64,8 @@ class AuthViewModel {
     }
     
     
-    func didTapLoginButton() {
-        onNavigateToDashBoard?()
+    func didTapLoginButton(user: UserEntity) {
+        onNavigateToDashBoard?(user)
     }
     
     func didTapRegisterButton() {

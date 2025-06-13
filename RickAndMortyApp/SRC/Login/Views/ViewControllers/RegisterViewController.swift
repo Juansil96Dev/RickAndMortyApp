@@ -12,7 +12,7 @@ class RegisterViewController: UIViewController {
     
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "register")
+        imageView.image = UIImage(named: "morty")
         imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ class RegisterViewController: UIViewController {
         button.setTitle("Registrarse", for: .normal)
         button.backgroundColor = .systemGreen
         button.tintColor = .white
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 4
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         return button
     }()
@@ -89,8 +89,7 @@ class RegisterViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .systemBackground
-        
+        view.backgroundColor = UIColor(red: 0.941, green: 0.949, blue: 0.945, alpha: 1)
         view.addSubview(iconImageView)
         view.addSubview(titleLabel)
         

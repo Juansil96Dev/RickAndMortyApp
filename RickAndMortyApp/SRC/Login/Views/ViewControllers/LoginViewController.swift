@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         button.setTitle("Iniciar sesión", for: .normal)
         button.backgroundColor = .systemBlue
         button.tintColor = .white
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 4
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         return button
     }()
@@ -41,7 +41,11 @@ class LoginViewController: UIViewController {
     private let goToRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Registrarse", for: .normal)
-        button.tintColor = .systemGray
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 4
+        button.layer.borderColor = UIColor.white.cgColor
+        button.tintColor = .white
+        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         return button
     }()
     
@@ -58,11 +62,13 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindViewModel()
+        useDefaultBackButton()
+        setupBackground()
     }
     
     private func setupUI() {
-        view.backgroundColor = .systemBackground
-        
+        view.backgroundColor = UIColor(red: 0.941, green: 0.949, blue: 0.945, alpha: 1)
+    
         let stack = UIStackView(arrangedSubviews: [emailField, passwordField, loginButton, goToRegisterButton])
         stack.axis = .vertical
         stack.spacing = 15
@@ -81,10 +87,24 @@ class LoginViewController: UIViewController {
         goToRegisterButton.addTarget(self, action: #selector(didTapGoToRegister), for: .touchUpInside)
     }
     
+    private func setupBackground() {
+        let backgroundImageView = UIImageView(image: UIImage(named: "loginFont"))
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(backgroundImageView)
+        view.sendSubviewToBack(backgroundImageView)
+        
+        NSLayoutConstraint.activate([
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
     private func bindViewModel() {
         viewModel.loginSuccess = { user in
-            print("Login exitoso para: \(user.name)")
-            self.viewModel.didTapLoginButton()
+            self.viewModel.didTapLoginButton(user: user)
         }
         viewModel.loginError = { errorMsg in
             self.showAlert(title: "Error", message: errorMsg)

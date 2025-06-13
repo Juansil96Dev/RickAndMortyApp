@@ -11,12 +11,10 @@ import UIKit
 
 class DashboardViewController: UITableViewController {
     
-    private let user: UserEntity?
-    private let menuItems = ["Lista de Personajes"]
-    private let menuIcons = ["rick"]
+    let viewModel: DashboardViewModel
     
-    init(user: UserEntity) {
-        self.user = user
+    init(viewModel:DashboardViewModel) {
+        self.viewModel = viewModel
         super.init(style: .grouped)
     }
     
@@ -27,24 +25,14 @@ class DashboardViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Inicio"
+        title = "Home"
         view.backgroundColor = UIColor(red: 0.941, green: 0.949, blue: 0.945, alpha: 1)
+        navigationItem.hidesBackButton = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        useDefaultBackButton()
         setupFooterButton()
     }
-    
-    private func greetingMessage() -> String {
-        let hour = Calendar.current.component(.hour, from: Date())
-        let greeting: String
-        switch hour {
-        case 6..<12: greeting = "Buenos días"
-        case 12..<19: greeting = "Buenas tardes"
-        default: greeting = "Buenas noches"
-        }
-        return "\(greeting), \(user?.name.capitalized ?? "")"
-    }
-    
-    
+        
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -55,20 +43,20 @@ class DashboardViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuItems.count
+        return viewModel.numberOfMenuItems()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return 75
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.font = .systemFont(ofSize: 25, weight: .bold)
-        cell.textLabel?.text = menuItems[indexPath.row]
+        cell.textLabel?.text = viewModel.getMenuItems(index: indexPath.row)
         cell.accessoryType = .none
-        cell.imageView?.image = UIImage(named: menuIcons[indexPath.row])
+        cell.imageView?.image = UIImage(named: viewModel.getMenuIcons(index: indexPath.row))
         
         return cell
     }
@@ -80,7 +68,7 @@ class DashboardViewController: UITableViewController {
         
         let greetingLabel = UILabel()
         greetingLabel.translatesAutoresizingMaskIntoConstraints = false
-        greetingLabel.text = greetingMessage()
+        greetingLabel.text = viewModel.getUserLogued()
         greetingLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         greetingLabel.textColor = .white
         greetingLabel.textAlignment = .center
@@ -105,7 +93,13 @@ class DashboardViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // Aquí iría la navegación a la lista de personajes
+        switch indexPath.row {
+        case 0:
+            self.viewModel.didTapCharacterListOption()
+        default:
+            self.showAlert()
+        }
+        
     }
     
     private func setupFooterButton() {
@@ -133,8 +127,15 @@ class DashboardViewController: UITableViewController {
         tableView.tableFooterView = footerView
     }
     
+    private func showAlert() {
+        let alert = UIAlertController(title: "Proximanente",
+                                      message: "Esta es una función que se implementará en un futuro",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
     @objc private func logoutTapped() {
-        print("Cerrar sesión pulsado")
-        // Aquí implementa la lógica de logout y transición a pantalla login
+        viewModel.didTapCloseSession()
     }
 }

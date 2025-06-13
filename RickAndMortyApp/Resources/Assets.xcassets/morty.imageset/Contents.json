@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-rick-sanchez-100.png",
+      "filename" : "icons8-morty-smith-100.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "icons8-morty-smith-200.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "icons8-morty-smith-300.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

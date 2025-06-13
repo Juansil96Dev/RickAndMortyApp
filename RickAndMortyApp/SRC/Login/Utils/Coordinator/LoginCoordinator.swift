@@ -19,8 +19,8 @@ class LoginCoordinator: Coordinator {
     func start() {
         let coreRepository = CoreDataAuthRepositoryImpl()
         let viewModel = AuthViewModel(repository: coreRepository)
-        viewModel.onNavigateToDashBoard = { [weak self] in
-            self?.goToDashboard()
+        viewModel.onNavigateToDashBoard = { [weak self] user in
+            self?.goToDashboard(user: user)
         }
         
         viewModel.onNavigateToRegisterUser = { [weak self] in
@@ -35,8 +35,8 @@ class LoginCoordinator: Coordinator {
         rootViewController.pushViewController(registerVC, animated: true)
     }
     
-    private func goToDashboard() {
-        let dashboardCoordinator = DashboardCoordinator(rootViewController: rootViewController)
+    private func goToDashboard(user:UserEntity) {
+        let dashboardCoordinator = DashboardCoordinator(rootViewController: rootViewController, userLogged: user)
         childCoordinators.append(dashboardCoordinator)
         dashboardCoordinator.start()
     }

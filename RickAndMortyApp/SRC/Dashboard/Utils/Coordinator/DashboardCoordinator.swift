@@ -11,17 +11,22 @@ class DashboardCoordinator: Coordinator {
    
     var rootViewController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    var userLogged: UserEntity
     
-    init(rootViewController: UINavigationController) {
+    init(rootViewController: UINavigationController,userLogged: UserEntity) {
         self.rootViewController = rootViewController
+        self.userLogged = userLogged
     }
     
     func start() {
-        let viewModel = DashboardViewModel()
+        let viewModel = DashboardViewModel(userLogued: userLogged)
         viewModel.onNavigateToCharacterView = { [weak self] in
             self?.goToCharactersListView()
         }
-        let loginViewController = DashboardViewController(user: UserEntity(name: "juansil", email: "correo", password: "12345"))
+        viewModel.onNavigateToLoginView = { [weak self] in
+            self?.goToLoginView()
+        }
+        let loginViewController = DashboardViewController(viewModel: viewModel)
         rootViewController.pushViewController(loginViewController, animated: false)
     }
     
@@ -31,5 +36,8 @@ class DashboardCoordinator: Coordinator {
         characterCoordinator.start()
     }
     
+    func goToLoginView() {
+        rootViewController.popToRootViewController(animated: true)
+    }
 
 }
