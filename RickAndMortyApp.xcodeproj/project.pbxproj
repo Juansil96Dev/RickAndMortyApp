@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FEF929582DFBD22500B9E21B /* ObjectMapper in Frameworks */ = {isa = PBXBuildFile; productRef = FEF929572DFBD22500B9E21B /* ObjectMapper */; };
+		FEF9295B2DFBD25700B9E21B /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = FEF9295A2DFBD25700B9E21B /* SDWebImage */; };
+		FEF9295D2DFBD25700B9E21B /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FEF9295C2DFBD25700B9E21B /* SDWebImageMapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		609BCD6A2DFAF9BA00E9C3D5 /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEF9295B2DFBD25700B9E21B /* SDWebImage in Frameworks */,
+				FEF9295D2DFBD25700B9E21B /* SDWebImageMapKit in Frameworks */,
+				FEF929582DFBD22500B9E21B /* ObjectMapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = RickAndMortyApp;
 			packageProductDependencies = (
+				FEF929572DFBD22500B9E21B /* ObjectMapper */,
+				FEF9295A2DFBD25700B9E21B /* SDWebImage */,
+				FEF9295C2DFBD25700B9E21B /* SDWebImageMapKit */,
 			);
 			productName = RickAndMortyApp;
 			productReference = 609BCD6A2DFAF9BA00E9C3D5 /* RickAndMortyApp.app */;
@@ -107,6 +119,10 @@
 			);
 			mainGroup = 609BCD612DFAF9BA00E9C3D5;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FEF929562DFBD22500B9E21B /* XCRemoteSwiftPackageReference "ObjectMapper" */,
+				FEF929592DFBD25700B9E21B /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 609BCD6B2DFAF9BA00E9C3D5 /* Products */;
 			projectDirPath = "";
@@ -335,6 +351,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FEF929562DFBD22500B9E21B /* XCRemoteSwiftPackageReference "ObjectMapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tristanhimmelman/ObjectMapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
+		FEF929592DFBD25700B9E21B /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FEF929572DFBD22500B9E21B /* ObjectMapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEF929562DFBD22500B9E21B /* XCRemoteSwiftPackageReference "ObjectMapper" */;
+			productName = ObjectMapper;
+		};
+		FEF9295A2DFBD25700B9E21B /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEF929592DFBD25700B9E21B /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		FEF9295C2DFBD25700B9E21B /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FEF929592DFBD25700B9E21B /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 609BCD622DFAF9BA00E9C3D5 /* Project object */;
 }
