@@ -7,7 +7,7 @@
 
 class RMCharactersRepositoryImpl : CharactersRepository {
     func getCharacters(completion: @escaping ([Character]) -> Void) {
-        <#code#>
+        
     }
     
     
