@@ -17,12 +17,22 @@ class LoginCoordinator: Coordinator {
     }
     
     func start() {
-        let viewModel = LoginViewModel()
-        viewModel.onNavigateToDetail = { [weak self] in
+        let coreRepository = CoreDataAuthRepositoryImpl()
+        let viewModel = AuthViewModel(repository: coreRepository)
+        viewModel.onNavigateToDashBoard = { [weak self] in
             self?.goToDashboard()
         }
-        let loginViewController = InitialViewController(viewModel: viewModel)
+        
+        viewModel.onNavigateToRegisterUser = { [weak self] in
+            self?.goToRegisterUser(viewModel: viewModel)
+        }
+        let loginViewController = LoginViewController(viewModel: viewModel)
         rootViewController.pushViewController(loginViewController, animated: false)
+    }
+    
+    private func goToRegisterUser(viewModel : AuthViewModel) {
+        let registerVC = RegisterViewController(viewModel: viewModel)
+        rootViewController.pushViewController(registerVC, animated: true)
     }
     
     private func goToDashboard() {
