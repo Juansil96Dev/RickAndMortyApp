@@ -21,7 +21,7 @@ class DashboardCoordinator: Coordinator {
         viewModel.onNavigateToCharacterView = { [weak self] in
             self?.goToCharactersListView()
         }
-        let loginViewController = DashboardViewController(viewModel: viewModel)
+        let loginViewController = DashboardViewController(user: UserEntity(name: "juansil", email: "correo", password: "12345"))
         rootViewController.pushViewController(loginViewController, animated: false)
     }
     

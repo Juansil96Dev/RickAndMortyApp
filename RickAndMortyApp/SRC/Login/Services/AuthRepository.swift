@@ -11,7 +11,6 @@ enum AuthError: Error, LocalizedError {
     case userAlreadyExists
     case invalidCredentials
     case unknown
-    case emailAlreadyExists
 
     var errorDescription: String? {
         switch self {

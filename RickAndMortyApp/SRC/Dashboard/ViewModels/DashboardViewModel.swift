@@ -6,6 +6,8 @@
 //
 
 class DashboardViewModel {
+    
+    var userLogued: UserEntity?
     var onNavigateToCharacterView: (() -> Void)?
 
     func didTapButton() {

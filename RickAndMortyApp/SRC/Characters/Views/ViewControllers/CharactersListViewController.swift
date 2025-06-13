@@ -76,7 +76,6 @@ class CharactersListViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    // MARK: Scroll infinito
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
@@ -88,7 +87,6 @@ class CharactersListViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionView
 extension CharactersListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.filteredCharacters.count
