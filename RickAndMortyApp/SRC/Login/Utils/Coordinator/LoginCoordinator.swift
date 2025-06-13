@@ -25,8 +25,11 @@ class LoginCoordinator: Coordinator {
         rootViewController.pushViewController(loginViewController, animated: false)
     }
     
-    func goToDashboard() {
-        let viewController = DashboardViewController()
-        rootViewController.pushViewController(viewController, animated: true)
+    private func goToDashboard() {
+        let dashboardCoordinator = DashboardCoordinator(rootViewController: rootViewController)
+        childCoordinators.append(dashboardCoordinator)
+        dashboardCoordinator.start()
     }
+    
+    
 }

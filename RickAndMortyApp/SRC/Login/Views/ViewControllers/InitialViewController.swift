@@ -12,7 +12,7 @@ class InitialViewController: UIViewController {
     
     let button : UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Got to Rick and Morty", for: .normal)
+        button.setTitle("LOGIN VIEW", for: .normal)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
