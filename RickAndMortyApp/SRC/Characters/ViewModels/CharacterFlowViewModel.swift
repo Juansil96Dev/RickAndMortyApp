@@ -13,6 +13,7 @@ class CharacterViewModel {
     private var currentPage = 1
     private var isLoading = false
     private var allCharacters: [CharacterEntity] = []
+    var isSearching: Bool = false
     
     var filteredCharacters: [CharacterEntity] = []
     var didUpdate: (() -> Void)?
@@ -26,11 +27,12 @@ class CharacterViewModel {
     func loadInitialCharacters() {
         currentPage = 1
         allCharacters.removeAll()
+        isSearching = false
         fetchCharacters()
     }
     
     func loadMoreCharacters() {
-        guard !isLoading else { return }
+        guard !isLoading, !isSearching  else { return }
         currentPage += 1
         fetchCharacters()
     }
@@ -54,6 +56,8 @@ class CharacterViewModel {
     }
     
     func filter(by query: String) {
+        isSearching = !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        
         if query.isEmpty {
             filteredCharacters = allCharacters
         } else {

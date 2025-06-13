@@ -37,7 +37,7 @@ class CharactersListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseIdentifier)
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = UIColor(red: 0.941, green: 0.949, blue: 0.945, alpha: 1)
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
