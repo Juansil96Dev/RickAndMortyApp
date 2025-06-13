@@ -52,7 +52,7 @@ class CharacterCell: UICollectionViewCell {
     
     private var blurEffectView: UIVisualEffectView?
     
-    var onclick: (() -> Void)?
+    var onTap: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -111,19 +111,23 @@ class CharacterCell: UICollectionViewCell {
         self.imageView.addGestureRecognizer(gesture)
     }
 
-    func configure(with entity: CharacterEntity) {
+    func configure(
+        with entity: CharacterEntity,
+        onTap: (() -> Void)?) {
+            
         if  entity.name.count > 16 {
             headlineView.heightAnchor.constraint(equalToConstant: 64).isActive = true
         } else {
             headlineView.heightAnchor.constraint(equalToConstant: 44).isActive = true
         }
         
+        self.onTap = onTap
         nameLabel.text = entity.name
-        imageView.sd_setImage(with: URL(string: entity.imageURL), placeholderImage: UIImage(named:"emptyImage"))
+        imageView.sd_setImage(with: URL(string: entity.imageURL), placeholderImage: UIImage(systemName: "person.slash"))
     }
     
     @objc private func handleTap() {
-        self.onclick?()
+        self.onTap?()
     }
     
     

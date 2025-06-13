@@ -33,6 +33,7 @@ class InitialViewController: UIViewController {
         self.view.backgroundColor = .white
         self.title = "Login"
         self.layoutUI()
+        useDefaultBackButton()
     }
     
     func layoutUI() {

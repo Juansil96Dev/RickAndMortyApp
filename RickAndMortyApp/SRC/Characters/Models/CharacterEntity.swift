@@ -5,6 +5,7 @@
 //  Created by Juan Gonzalez on 2025-06-13.
 //
 import Foundation
+import UIKit
 
 enum CharacterStatus: String {
     case alive = "Alive"
@@ -13,6 +14,28 @@ enum CharacterStatus: String {
 
     init(from string: String) {
         self = CharacterStatus(rawValue: string) ?? .unknown
+    }
+    
+    var symbol: String {
+        switch self {
+        case .alive:
+            return "live"
+        case .dead:
+            return "dead"
+        case .unknown:
+            return "unknow"
+        }
+    }
+            
+    var color: UIColor {
+        switch self {
+        case .alive:
+            return .systemGreen
+        case .dead:
+            return .systemRed
+        case .unknown:
+            return .systemGray
+        }
     }
 }
 
@@ -24,6 +47,32 @@ enum CharacterGender: String {
 
     init(from string: String) {
         self = CharacterGender(rawValue: string) ?? .unknown
+    }
+    
+    var symbol: String {
+        switch self {
+        case .female:
+            return "female"
+        case .male:
+            return "male"
+        case .genderless:
+            return "genderless"
+        case .unknown:
+            return "unknow"
+        }
+    }
+            
+    var color: UIColor {
+        switch self {
+        case .female:
+            return .systemPink
+        case .male:
+            return .systemBlue
+        case .genderless:
+            return .systemGray
+        case .unknown:
+            return .lightGray
+        }
     }
 }
 

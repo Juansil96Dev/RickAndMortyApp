@@ -30,6 +30,7 @@ class DashboardViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.title = "Dashboard"
+        useDefaultBackButton()
         self.layoutUI()
     }
     

@@ -17,14 +17,15 @@ class CharacterCoordinator : Coordinator {
     func start() {
         let repository = RMCharactersRepositoryImpl()
         let viewModel = CharacterViewModel(repository: repository)
+        viewModel.showDetails = { [weak self] character in
+            self?.goToDetailCharacterView(character: character)
+        }
         let viewController = CharactersListViewController(viewModel: viewModel)
         rootViewController.pushViewController(viewController, animated: true)
     }
     
-    func goToDetailCharacterView() {
-        let repository = RMCharactersRepositoryImpl()
-        let viewModel = CharacterViewModel(repository: repository)
-        let viewController = CharactersListViewController(viewModel: viewModel)
+    func goToDetailCharacterView(character: CharacterEntity) {
+        let viewController = CharacterDetailViewController(character: character)
         rootViewController.pushViewController(viewController, animated: true)
     }
     

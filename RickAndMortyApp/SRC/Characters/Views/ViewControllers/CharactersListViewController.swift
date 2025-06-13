@@ -19,8 +19,9 @@ class CharactersListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Personajes"
-        view.backgroundColor = .systemBackground
+        title = "Characters"
+        view.backgroundColor = UIColor(red: 0.941, green: 0.949, blue: 0.945, alpha: 1)
+        useDefaultBackButton()
         setupCollectionView()
         setupSearchBar()
         bindViewModel()
@@ -100,7 +101,9 @@ extension CharactersListViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let character = viewModel.filteredCharacters[indexPath.item]
-        cell.configure(with: character)
+        cell.configure(with: character) {
+            self.viewModel.showDetails(character: character)
+        }
         return cell
     }
 }

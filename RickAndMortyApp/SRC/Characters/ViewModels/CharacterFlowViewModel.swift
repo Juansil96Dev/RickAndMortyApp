@@ -17,6 +17,7 @@ class CharacterViewModel {
     var filteredCharacters: [CharacterEntity] = []
     var didUpdate: (() -> Void)?
     var didFail: ((APIError) -> Void)?
+    var showDetails : ((CharacterEntity) -> Void)?
     
     init(repository: CharactersRepository) {
         self.repository = repository
@@ -61,5 +62,9 @@ class CharacterViewModel {
             }
         }
         didUpdate?()
+    }
+    
+    func showDetails(character: CharacterEntity) {
+        self.showDetails?(character)
     }
 }
