@@ -1,0 +1,68 @@
+# Xcode
+.DS_Store
+build/
+DerivedData/
+*.xcworkspace
+!default.xcworkspace
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager
+.build/
+Packages/
+
+# User settings - no subir datos específicos de usuario
+*.xcuserstate
+*.xcuserdatad
+
+# Archives (productos de exportación)
+*.xcarchive
+
+# Otros archivos de configuración de Xcode que no deben versionarse
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Logs
+*.log
+
+# SwiftPM generated files
+.swiftpm
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Icon?
+Icon?
+._*
+
+# Thumbs.db
+Thumbs.db
+
+# Files created by Xcode
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Temporary files
+*.tmp
+*.swp
+
+# Playground related
+timeline.xctimeline
+playground.xcworkspace
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Bundle artifact
+*.xcbuilddata
