@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 enum HTTPMethod: String {
     case GET
@@ -20,21 +21,21 @@ enum APIError: Error {
     case requestFailed(Error)
     case invalidResponse
     case decodingFailed(Error)
+    case custom(message: String, code: Int?)
     case unknown
 }
 
 protocol APIClientProtocol {
-    func request<T: Decodable>(
+    func requestRaw(
         endpoint: String,
         method: HTTPMethod,
         headers: [String: String]?,
         body: Data?,
-        completion: @escaping (Result<T, APIError>) -> Void
+        completion: @escaping (Result<Data, APIError>) -> Void
     )
 }
 
 class APIClient: APIClientProtocol {
-
     private let baseURL: URL
     private let session: URLSession
 
@@ -43,12 +44,12 @@ class APIClient: APIClientProtocol {
         self.session = session
     }
 
-    func request<T: Decodable>(
+    func requestRaw(
         endpoint: String,
         method: HTTPMethod,
         headers: [String: String]? = nil,
         body: Data? = nil,
-        completion: @escaping (Result<T, APIError>) -> Void
+        completion: @escaping (Result<Data, APIError>) -> Void
     ) {
         guard let url = URL(string: endpoint, relativeTo: baseURL) else {
             completion(.failure(.invalidURL))
@@ -58,13 +59,8 @@ class APIClient: APIClientProtocol {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
 
-        if let headers = headers {
-            headers.forEach { request.setValue($1, forHTTPHeaderField: $0) }
-        }
-
-        if let body = body {
-            request.httpBody = body
-        }
+        headers?.forEach { request.setValue($1, forHTTPHeaderField: $0) }
+        request.httpBody = body
 
         session.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -72,18 +68,35 @@ class APIClient: APIClientProtocol {
                 return
             }
 
-            guard let data = data else {
+            guard let httpResponse = response as? HTTPURLResponse, let data = data else {
                 completion(.failure(.invalidResponse))
                 return
             }
 
-            do {
-                let decoded = try JSONDecoder().decode(T.self, from: data)
-                completion(.success(decoded))
-            } catch let decodeError {
-                completion(.failure(.decodingFailed(decodeError)))
+            let statusCode = httpResponse.statusCode
+            if (200...299).contains(statusCode) {
+                completion(.success(data))
+            } else {
+                if let jsonString = String(data: data, encoding: .utf8),
+                   let apiError = Mapper<APIErrorResponse>().map(JSONString: jsonString) {
+                    completion(.failure(.custom(message: apiError.message ?? "Error desconocido", code: apiError.code)))
+                } else {
+                    completion(.failure(.unknown))
+                }
             }
-
         }.resume()
+    }
+}
+
+
+class APIErrorResponse: Mappable {
+    var message: String?
+    var code: Int?
+
+    required init?(map: Map) {}
+
+    func mapping(map: Map) {
+        message <- map["error"]
+        code    <- map["code"]
     }
 }
