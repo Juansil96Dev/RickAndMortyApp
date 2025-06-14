@@ -36,3 +36,26 @@ El proyecto utiliza [Swift Package Manager (SPM)](https://swift.org/package-mana
 - iOS 13.0+
 - Swift 4.2
 
+## 🚀 Instalación y ejecución
+
+1. Clona este repositorio:
+
+   ```bash
+   git clone https://gitlab.com/tuusuario/rickandmortyapp.git
+   cd rickandmortyapp
+2. Abre el proyecto en Xcode:
+    open RickAndMortyApp.xcodeproj
+3. Espera a que se resuelvan las dependencias (SPM).
+4. Ejecuta el proyecto en un simulador o dispositivo real.
+
+## 🧪 Próximas mejoras
+
+- Implementar autenticación real con backend remoto.
+- Mejorar validación de formularios y mensajes de error.
+- Agregar favoritos o filtros por especie/estado/género.
+- Visualizacion de episodios y localidades.
+- Tests unitarios y de integración.
+
+## 👨‍💻 Autor
+
+    Desarrollado por [Juan Silvino Gonzalez Agüero] – @jsgonzalez96.dev
