@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  RickAndMortyApp
 //
-//  Created by Personal on 2025-06-12.
+//  Created by Juan Gonzalez on 2025-06-12.
 //
 
 import UIKit
