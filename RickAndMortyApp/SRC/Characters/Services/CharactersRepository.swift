@@ -6,5 +6,5 @@
 //
 
 protocol CharactersRepository {
-    func getCharacters(completion: @escaping ([Character]) -> Void)
+    func getCharacters(page: Int, completion: @escaping (Result<[CharacterEntity], APIError>) -> Void)
 }
